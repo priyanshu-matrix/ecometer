@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 
-
 const AskAi = () => {
   const PORT = "http://localhost:4000";
   const [input, setInput] = useState("");
@@ -12,15 +11,21 @@ const AskAi = () => {
     setResponse("");
   };
 
-
   const [loading, setLoading] = useState(false);
 
   const sendMessage = async () => {
     setLoading(true);
     try {
-      const res = await axios.post(`${PORT}/ask-ai`, {
-        prompt: input,
-      });
+      const token = localStorage.getItem("token");
+      const res = await axios.post(
+        `${PORT}/ask-ai`,
+        { prompt: input },
+        {
+          headers: {
+            "auth-token": token,
+          },
+        }
+      );
       setResponse(res.data.response);
     } catch (error) {
       console.error(error);
@@ -98,11 +103,13 @@ const AskAi = () => {
       <h1 style={{ textAlign: "center", marginBottom: "20px", color: "#333" }}>
         E-Calulator
       </h1>
-      <h5 style={{ textAlign: "center", marginBottom: "20px", color: "grey" }} >
-        Ask anything about your appliances energy consumption and ways to save energy.
+      <h5 style={{ textAlign: "center", marginBottom: "20px", color: "grey" }}>
+        Ask anything about your appliances energy consumption and ways to save
+        energy.
       </h5>
-      <h5 style={{ textAlign: "center", marginBottom: "20px", color: "grey" }} >
-        Kindly provide the details of your appliance (Name, Power Rating) and its usage duration.
+      <h5 style={{ textAlign: "center", marginBottom: "20px", color: "grey" }}>
+        Kindly provide the details of your appliance (Name, Power Rating) and
+        its usage duration.
       </h5>
       <div className="input-group mb-3">
         <input
@@ -143,7 +150,7 @@ const AskAi = () => {
             dangerouslySetInnerHTML={{
               __html: formatResponse(response),
             }}
-            style={{ marginBottom: "15px",color: "#333" }}
+            style={{ marginBottom: "15px", color: "#333" }}
           />
           <button
             type="button"
