@@ -1,7 +1,17 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import {
+  BarChart,
+  Bar,
+  Rectangle,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 const AskAi = () => {
   const PORT = "http://localhost:4000";
@@ -25,7 +35,7 @@ const AskAi = () => {
       // Transform the data into the desired format
       const formattedData = json.map((item) => ({
         name: item.applianceName,
-        uv: item.energyConsumption,
+        KiloWatt_Hour: item.energyConsumption,
         // pv: item.energyConsumption,
         amt: 2400,
       }));
@@ -123,6 +133,19 @@ const AskAi = () => {
     return formattedText;
   };
 
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      getAppliance();
+    }
+    const intervalId = setInterval(() => {
+      if (localStorage.getItem("token")) {
+        getAppliance();
+      }
+    }, 2000); // Update every 5 seconds
+
+    return () => clearInterval(intervalId); // Clear interval on unmount
+  }, []);
+
   return (
     <>
       <div
@@ -205,28 +228,41 @@ const AskAi = () => {
           </div>
         )}
       </div>
-      <div style={{ width: "50%", height: "300px", margin: "0 auto" }}>
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart
-          width={500}
-          height={300}
-          data={data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="pv" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />} />
-          <Bar dataKey="uv" fill="#82ca9d" activeBar={<Rectangle fill="gold" stroke="purple" />} />
-        </BarChart>
-      </ResponsiveContainer>
+      <div
+        style={{
+          width: "auto",
+          height: "300px",
+          margin: "0 auto",
+          backgroundColor: "#ddeedf",
+          padding: "20px",
+          borderRadius: "10px",
+          boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+        }}
+      >
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            width={500}
+            height={300}
+            data={data}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar
+              dataKey="KiloWatt_Hour"
+              fill="#35495e"
+              activeBar={<Rectangle fill="gold" stroke="purple" />}
+            />
+          </BarChart>
+        </ResponsiveContainer>
       </div>
     </>
   );
