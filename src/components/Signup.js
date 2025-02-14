@@ -42,31 +42,42 @@ const Signup = (props) => {
   };
 
   return (
-    <div
-      className="container d-flex justify-content-center align-items-center"
-      style={{ minHeight: "50vh" }}
-    >
-      <form
-        onSubmit={handlesubmit}
-        style={{ width: "100%", maxWidth: "400px" }}
-      >
+    <div className="container" style={{ maxWidth: "400px", margin: "auto", backgroundColor: '#f8f9fa', padding: '20px', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', animation: 'fadeIn 1s' }}>
+      <style>
+        {`
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .form-control:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+          }
+          .btn-primary {
+            background-color: #28a745;
+            border-color: #28a745;
+          }
+          .btn-primary:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+          }
+        `}
+      </style>
+      <form onSubmit={handlesubmit}> {/* replace handlesubmit with your signup submit function */}
         <div className="mb-3">
-          <label htmlFor="name" className="form-label">
-            Username
+          <label htmlFor="name" className="form-label" style={{ color: '#343a40' }}> {/* Added label styling */}
+            Name
           </label>
           <input
             type="text"
             className="form-control"
             id="name"
             name="name"
-            value={credentials.name}
             onChange={handleonchange}
-            minLength={3}
-            required
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="email" className="form-label">
+          <label htmlFor="email" className="form-label" style={{ color: '#343a40' }}> {/* Added label styling */}
             Email address
           </label>
           <input
@@ -74,14 +85,12 @@ const Signup = (props) => {
             className="form-control"
             id="email"
             name="email"
-            value={credentials.email}
             aria-describedby="emailHelp"
             onChange={handleonchange}
-            required
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="password" className="form-label">
+          <label htmlFor="password" className="form-label" style={{ color: '#343a40' }}> {/* Added label styling */}
             Password
           </label>
           <input
@@ -89,15 +98,11 @@ const Signup = (props) => {
             className="form-control"
             id="password"
             name="password"
-            value={credentials.password}
             onChange={handleonchange}
-            minLength={5}
-            required
           />
-          <b>^Keep your password and email always remembered.</b>
         </div>
         <div className="mb-3">
-          <label htmlFor="cpassword" className="form-label">
+          <label htmlFor="cpassword" className="form-label" style={{ color: '#343a40' }}> {/* Added label styling */}
             Confirm Password
           </label>
           <input
@@ -105,10 +110,7 @@ const Signup = (props) => {
             className="form-control"
             id="cpassword"
             name="cpassword"
-            value={credentials.cpassword}
             onChange={handleonchange}
-            minLength={5}
-            required
           />
         </div>
         <button type="submit" className="btn btn-primary">

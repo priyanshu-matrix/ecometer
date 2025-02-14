@@ -22,7 +22,7 @@ const Login = (props) => {
     console.log(json);
     if (json.success) {
       localStorage.setItem("token", json.authToken);
-      props.showAlert("Logged in Successfully", "success");
+      props.showAlert("Logged in Successfully", "suceess");
       navigate("/");
     } else {
       props.showAlert("Invalid Credentials", "danger");
@@ -34,10 +34,30 @@ const Login = (props) => {
   };
 
   return (
-    <div className="container" style={{ maxWidth: "400px", margin: "auto" }}>
+    <div className="container" style={{ maxWidth: "400px", margin: "auto", backgroundColor: '#f8f9fa', padding: '20px', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', animation: 'fadeIn 1s' }}>
+      <style>
+        {`
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .form-control:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+          }
+          .btn-primary {
+            background-color: #28a745;
+            border-color: #28a745;
+          }
+          .btn-primary:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+          }
+        `}
+      </style>
       <form onSubmit={handlesubmit}>
         <div className="mb-3">
-          <label htmlFor="email" className="form-label">
+          <label htmlFor="email" className="form-label" style={{ color: '#343a40' }}>
             Email address
           </label>
           <input
@@ -52,7 +72,7 @@ const Login = (props) => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="password" className="form-label">
+          <label htmlFor="password" className="form-label" style={{ color: '#343a40' }}>
             Password
           </label>
           <input
