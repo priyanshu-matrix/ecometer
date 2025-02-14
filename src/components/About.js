@@ -38,7 +38,7 @@ const About = (props) => {
       </p>
       <footer className="footer" >
         <div className="container">
-          <div className="social-links">
+          <div className="social-links" style={{ fontSize: "1.8rem" }}>
             <a
               href="https://github.com"
               target="_blank"
