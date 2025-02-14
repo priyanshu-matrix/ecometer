@@ -17,7 +17,7 @@ const AskAi = () => {
   const PORT = "http://localhost:4000";
   const [input, setInput] = useState("");
   const [response, setResponse] = useState("");
-
+  const [appliance, setAppliance] = useState([]);
   const [data, setData] = useState([]);
 
   const getAppliance = async () => {
@@ -30,7 +30,7 @@ const AskAi = () => {
         },
       });
       const json = await response.json();
-      console.log(json);
+      setAppliance(json);
 
       // Transform the data into the desired format
       const formattedData = json.map((item) => ({
@@ -45,13 +45,6 @@ const AskAi = () => {
       console.error("Error fetching or processing appliance data:", error);
     }
   };
-
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      getAppliance();
-    }
-  }, []);
-
   const clearOnClick = () => {
     setResponse("");
   };
@@ -79,6 +72,40 @@ const AskAi = () => {
       setLoading(false);
     }
   };
+
+  //api for deleting appliance
+
+  const deleteAppliance = async (id) => {
+    try {
+      const response = await fetch(`${PORT}/api/delete-appliance/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("token"),
+        },
+      });
+      const json = await response.json();
+      const updatedAppliance = appliance.filter((appliance) => appliance._id !== id);
+      setAppliance(updatedAppliance);
+
+      // Transform the data into the desired format
+      const formattedData = json.map((item) => ({
+        name: item.applianceName,
+        KiloWatt_Hour: item.energyConsumption,
+        // pv: item.energyConsumption,
+        amt: 2400,
+      }));
+
+      setData(formattedData);
+    } catch (error) {
+      console.error("Error deleting appliance:", error);
+    }
+  };
+
+  const OnClickDelete = (id) => {
+    deleteAppliance(id);
+  };
+
 
   const formatResponse = (text) => {
     // Replace newlines with HTML line breaks
@@ -132,11 +159,9 @@ const AskAi = () => {
 
     return formattedText;
   };
+  // console.log(appliance);
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      getAppliance();
-    }
     const intervalId = setInterval(() => {
       if (localStorage.getItem("token")) {
         getAppliance();
@@ -156,13 +181,13 @@ const AskAi = () => {
           padding: "20px",
           borderRadius: "10px",
           boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-          backgroundColor: "#f9f9f9",
+          backgroundColor: "#e0ffcd",
         }}
       >
         <h1
-          style={{ textAlign: "center", marginBottom: "20px", color: "#333" }}
+          style={{ textAlign: "center", marginBottom: "20px", color: "#2e7d32" }}
         >
-          E-Calulator
+          E-Calculator
         </h1>
         <h5
           style={{ textAlign: "center", marginBottom: "20px", color: "grey" }}
@@ -263,6 +288,42 @@ const AskAi = () => {
             />
           </BarChart>
         </ResponsiveContainer>
+      </div>
+      <div
+        style={{
+          marginTop: "20px",
+          padding: "20px",
+          borderRadius: "10px",
+          boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+          backgroundColor: "#f9f9f9",
+        }}
+      >
+        <h3 style={{ textAlign: "center", marginBottom: "20px", color: "#2e7d32" }}>
+          Appliance List
+        </h3>
+        <ul style={{ listStyleType: "none", padding: 0 }}>
+          {appliance.map((item) => (
+            <li
+              key={item._id}
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: "10px",
+                borderBottom: "1px solid #ddd",
+              }}
+            >
+              <span>{item.applianceName}</span>
+              <button
+                className="btn btn-danger"
+                onClick={() => OnClickDelete(item._id)}
+                style={{ backgroundColor: "#dc3545", borderColor: "#dc3545" }}
+              >
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
     </>
   );
