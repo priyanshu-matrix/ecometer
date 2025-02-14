@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+require("dotenv").config();
 import {
   BarChart,
   Bar,
@@ -14,7 +15,7 @@ import {
 } from "recharts";
 
 const AskAi = () => {
-  const PORT = "http://localhost:4000";
+  const PORT = process.env.PORT || "http://localhost:5000";
   const [input, setInput] = useState("");
   const [response, setResponse] = useState("");
   const [appliance, setAppliance] = useState([]);
