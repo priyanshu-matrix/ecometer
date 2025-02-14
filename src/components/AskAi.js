@@ -14,7 +14,7 @@ import {
 } from "recharts";
 
 const AskAi = () => {
-  const PORT = "http://localhost:4000";
+  const PORT = "https://backend-ecometer.onrender.com";
   const [input, setInput] = useState("");
   const [response, setResponse] = useState("");
   const [appliance, setAppliance] = useState([]);
