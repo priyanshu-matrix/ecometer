@@ -182,13 +182,28 @@ const AskAi = () => {
           borderRadius: "10px",
           boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
           backgroundColor: "#e0ffcd",
+          display: "flex", // Added to align items horizontally
+          flexDirection: "column", // Ensure items are stacked vertically
+          alignItems: "center", // Center items horizontally
         }}
       >
-        <h1
-          style={{ textAlign: "center", marginBottom: "20px", color: "#2e7d32" }}
-        >
-          E-Calculator
-        </h1>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/392/392071.png"
+            alt="Energy Saving Tips"
+            style={{ width: "50px", height: "50px", marginRight: "10px", marginBottom: " 15px" }} // Added margin for spacing
+          />
+          <h1
+            style={{
+              textAlign: "center",
+              marginBottom: "20px",
+              color: "#2e7d32",
+              marginTop: "0",
+            }}
+          >
+            E-Calculator
+          </h1>
+        </div>
         <h5
           style={{ textAlign: "center", marginBottom: "20px", color: "grey" }}
         >
@@ -298,7 +313,9 @@ const AskAi = () => {
           backgroundColor: "#f5feff",
         }}
       >
-        <h3 style={{ textAlign: "center", marginBottom: "20px", color: "#2e7d32" }}>
+        <h3
+          style={{ textAlign: "center", marginBottom: "20px", color: "#2e7d32" }}
+        >
           Appliance List
         </h3>
         <ul style={{ listStyleType: "none", padding: 0 }}>
@@ -313,7 +330,12 @@ const AskAi = () => {
                 borderBottom: "1px solid #ddd",
               }}
             >
-              <span style={{ color:"black"}}>{item.applianceName}:   <span className="mx-3" style={{ color:"black"}}>{item.energyConsumption} KwH ~Avg~</span></span>
+              <span style={{ color: "black" }}>
+                {item.applianceName}:
+                <span className="mx-3" style={{ color: "black" }}>
+                  {item.energyConsumption} KwH ~Avg~
+                </span>
+              </span>
               <button
                 className="btn btn-danger"
                 onClick={() => OnClickDelete(item._id)}
