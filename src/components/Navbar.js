@@ -42,7 +42,7 @@ function Navbar(props) {
               id="logo"
               src="logo.jpeg"
               alt=""
-              className={`${show ? "show" : ""}`}
+              className={`${show ? "show" : ""} mx-3`}
             />
             Eco-Meter{props.version}
           </Link>
