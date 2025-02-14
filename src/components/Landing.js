@@ -10,6 +10,7 @@ const Landing = () => {
           Every small step toward a more sustainable lifestyle makes a big difference. 
           Join us in protecting our planet for future generations. 
         </p>
+        <p>It may also require 50+sec to load as we are using free hosting.</p>
         <Link to={localStorage.getItem('token') ? '/askai' : '/signup'}>
           <button
             className='btn btn-success my-5'
