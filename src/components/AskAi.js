@@ -319,7 +319,7 @@ const AskAi = () => {
           Appliance List
         </h3>
         <ul style={{ listStyleType: "none", padding: 0 }}>
-          {appliance.map((item) => (
+          {data.map((item) => (
             <li
               key={item._id}
               style={{
