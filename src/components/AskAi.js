@@ -295,7 +295,7 @@ const AskAi = () => {
           padding: "20px",
           borderRadius: "10px",
           boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-          backgroundColor: "#f9f9f9",
+          backgroundColor: "#f5feff",
         }}
       >
         <h3 style={{ textAlign: "center", marginBottom: "20px", color: "#2e7d32" }}>
@@ -313,7 +313,7 @@ const AskAi = () => {
                 borderBottom: "1px solid #ddd",
               }}
             >
-              <span>{item.applianceName}</span>
+              <span style={{ color:"black"}}>{item.applianceName}:   <span className="mx-3" style={{ color:"black"}}>{item.energyConsumption} KwH ~Avg~</span></span>
               <button
                 className="btn btn-danger"
                 onClick={() => OnClickDelete(item._id)}
