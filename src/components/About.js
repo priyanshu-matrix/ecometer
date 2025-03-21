@@ -34,7 +34,7 @@ const About = (props) => {
         </li>
       </ul>
       <p>
-        Developed by <b id="owner">Greenovators</b>
+        Developed by <b id="owner">Priyanshu</b>
       </p>
       <footer className="footer" >
         <div className="container">

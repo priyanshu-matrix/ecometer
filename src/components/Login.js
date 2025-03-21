@@ -34,7 +34,7 @@ const Login = (props) => {
   };
 
   return (
-    <div className="container" style={{ maxWidth: "400px", margin: "auto", backgroundColor: '#f8f9fa', padding: '20px', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', animation: 'fadeIn 1s' }}>
+    <div className="container" style={{ maxWidth: "400px",height: "41.5vh", margin: "auto", backgroundColor: '#f8f9fa', padding: '20px', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', animation: 'fadeIn 1s' }}>
       <style>
         {`
           @keyframes fadeIn {
@@ -85,7 +85,7 @@ const Login = (props) => {
             value={credentials.password}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary my-4">
           Login
         </button>
       </form>

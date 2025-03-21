@@ -27,12 +27,44 @@ export default function App() {
   if (mode === "light") {
     setmode("dark");
 
-    document.body.style.backgroundColor = "#347474";
+    document.body.style.background = "linear-gradient(300deg, #00bbf0, #00204a, #fdb44b)";
+    document.body.style.backgroundSize = "180% 180%";
+    document.body.style.animation = "gradient-animation 7s ease infinite";
+
+    // Add keyframes if they don't exist yet
+    if (!document.getElementById('gradient-animation-style')) {
+      const styleElement = document.createElement('style');
+      styleElement.id = 'gradient-animation-style';
+      styleElement.innerHTML = `
+        @keyframes gradient-animation {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+      `;
+      document.head.appendChild(styleElement);
+    }
     document.body.style.color = "white";
   } else {
     setmode("light");
 
-    document.body.style.backgroundColor = "#ddeedf";
+    document.body.style.background = "linear-gradient(300deg, #66bfbf, #eaf6f6, #f76b8a)";
+    document.body.style.backgroundSize = "180% 180%";
+    document.body.style.animation = "gradient-animation 7s ease infinite";
+
+    // Add keyframes if they don't exist yet
+    if (!document.getElementById('gradient-animation-style')) {
+      const styleElement = document.createElement('style');
+      styleElement.id = 'gradient-animation-style';
+      styleElement.innerHTML = `
+        @keyframes gradient-animation {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+      `;
+      document.head.appendChild(styleElement);
+    }
     document.body.style.color = "black";
   }
   };
@@ -40,7 +72,23 @@ export default function App() {
   useEffect(() => {
   // Set initial mode to light when the component mounts
   setmode("light");
-  document.body.style.backgroundColor = "#ddeedf";
+  document.body.style.background = "linear-gradient(300deg, #66bfbf, #eaf6f6, #f76b8a)";
+    document.body.style.backgroundSize = "180% 180%";
+    document.body.style.animation = "gradient-animation 7s ease infinite";
+
+    // Add keyframes if they don't exist yet
+    if (!document.getElementById('gradient-animation-style')) {
+      const styleElement = document.createElement('style');
+      styleElement.id = 'gradient-animation-style';
+      styleElement.innerHTML = `
+        @keyframes gradient-animation {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+      `;
+      document.head.appendChild(styleElement);
+    }
   document.body.style.color = "black";
   }, []);
 
